@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
+  <!-- Load static CSS file -->
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/app.css' %}" />
+  <link rel="icon" type="image/png" href="{% static 'eddig/assets/ico.png' %}" />
+  <script defer src="{% static 'eddig/scripts/script.js' %}"></script>
+
+  <title>Memory Game RPG - Eddig</title>
+</head>
+{% load static %}
+
+<body>
+  <div id="name-container">
+    <div style="margin: 10px 60px -20px 60px; text-align: center;">
+      <p><b>--   Controles:   --</b></p>
+        <p>Movimento: <span><img style="height:100%; width:40px; margin-left: 5px" src="{% static 'eddig/assets/icons/akeys.png' %}" alt=""></span></p>
+        <p>Girar:    C</p>
+      </div>
+
+    <h1>Insira seu nome</h1>
+    <input type="text" id="user-name" placeholder="Insira seu nome" />
+    <button onclick="submitName()">Iniciar</button>
+  </div>
+
+  <div id="end-container">
+    <h1>Game Over</h1>
+    <br />
+    <h2>Resultado:</h2>
+    <br />
+
+    <p class="name">Nome: <span></span></p>
+    <p class="flips2">Flips: <span>00</span></p>
+    <p class="timer2"><span>00</span>s</p>
+
+    <a href="/game/">
+    <button class="playAgain">Jogar Novamente</button>
+    </a>
+    <a href="/">
+      <button class="backToMenu">Voltar ao Menu</button>
+    </a>
+  </div>
+
+  <section id="memory-game">
+    <div class="wrapper">
+      <h2 class="flips">Flips: <span>00</span></h2>
+      <h2 class="timer"><span>00</span>s</h2>
+      <canvas id="game"></canvas>
+      <img src="{% static 'eddig/assets/images/overlay.png' %}" alt="overlay" class="overlay" />
+    </div>
+  </section>
+
+  <section id="controls">
+    <div class="wrapper">
+      <div class="moveKeys">
+        <button id="up">
+          <img src="{% static 'eddig/assets/icons/chevron-up.svg' %}" alt="control chevron" />
+        </button>
+        <div class="middle">
+          <button id="left">
+            <img src="{% static 'eddig/assets/icons/chevron-left.svg' %}" alt="control chevron" class="noSelect" />
+          </button>
+          <button id="right">
+            <img src="{% static 'eddig/assets/icons/chevron-right.svg' %}" alt="control chevron" class="noSelect" />
+          </button>
+        </div>
+        <button id="down">
+          <img src="{% static 'eddig/assets/icons/chevron-down.svg' %}" alt="control chevron" class="noSelect" />
+        </button>
+      </div>
+      <div class="actionKeys">
+        <button id="c" class="noSelect" onclick="openFullscreen()">C</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="sprites">
+    <img src="{% static 'eddig/assets/sprites/edd.png' %}" alt="player" id="player" />
+    <img src="{% static 'eddig/assets/sprites/grass.png' %}" alt="grass" id="grass" />
+    <img src="{% static 'eddig/assets/sprites/cat.png' %}" alt="cat" id="cat" />
+    <img src="{% static 'eddig/assets/sprites/hen.png' %}" alt="hen" id="hen" />
+    <img src="{% static 'eddig/assets/sprites/duck.png' %}" alt="duck" id="duck" />
+    <img src="{% static 'eddig/assets/sprites/cow.png' %}" alt="cow" id="cow" />
+    <img src="{% static 'eddig/assets/sprites/ghost.png' %}" alt="ghost" id="ghost" />
+    <img src="{% static 'eddig/assets/sprites/bat.png' %}" alt="bat" id="bat" />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game RPG - Eddig</title>
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/about.css' %}" />
+  <link rel="icon" type="image/png" href="{% static 'eddig/assets/ico.png' %}" />
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/menu.css' %}">
+  <script defer src="{% static 'eddig/scripts/menu.js' %}"></script>
+</head>
+
+<body>
+  <section class="controllers">
+    <div class="wrapper">
+      <a href="/">
+        <button type="button" id="home">
+          <img src="{% static 'eddig/assets/buttons/exit.png' %}" alt="">
+        </button>
+      </a>
+    </div>
+  </section>
+  <section class="about">
+    <div class="wrapper">
+      <div class="box">
+        <div class="aboutlogo">
+          <img src="{% static 'eddig/assets/aboutLogo.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="wrappper">
+      <div class="cred">
+        <h2>Programação para Internet</h2>
+        <div class="container">
+          <div class="bloco">
+            <h2>Endereco</h2>
+            <p>IFRN - Campus Santa Cruz/RN</p>
+          </div>
+          <div class="divisor">
+          </div>
+          <div class="bloco">
+            <h2>Professor</h2>
+            <p>Prof. Marcelo Figueiredo Barbosa Junior</p>
+          </div>
+          <div class="divisor">
+          </div>
+          <div class="bloco">
+            <h2>Aluno</h2>
+            <p>Edvaldo Henrique dos Santos</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>Todos os direitos reservados &copy; 2024</p>
+        </div>
+      </div>
+  </section>
+  </section>
+  <section id="memory-game">
+    <div class="wrapper">
+      <canvas id="game"></canvas>
+      <img src="{% static 'eddig/assets/images/overlay.png' %}" alt="overlay" class="overlay" />
+    </div>
+  </section>
+  <div class="sprites">
+    <img src="" alt="player" id="player" />
+    <img src="{% static 'eddig/assets/sprites/grass.png' %}" alt="grass" id="grass" />
+    <img src="{% static 'eddig/assets/sprites/cat.png' %}" alt="cat" id="cat" />
+    <img src="{% static 'eddig/assets/sprites/hen.png' %}" alt="hen" id="hen" />
+    <img src="{% static 'eddig/assets/sprites/duck.png' %}" alt="duck" id="duck" />
+    <img src="{% static 'eddig/assets/sprites/cow.png' %}" alt="cow" id="cow" />
+    <img src="{% static 'eddig/assets/sprites/ghost.png' %}" alt="ghost" id="ghost" />
+    <img src="{% static 'eddig/assets/sprites/bat.png' %}" alt="bat" id="bat" />
+  </div>
+</body>
+
+</html>

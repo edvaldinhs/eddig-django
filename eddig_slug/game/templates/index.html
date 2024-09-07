@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game RPG - Eddig</title>
+    <link rel="icon" type="image/png" href="{% static 'eddig/assets/ico.png' %}" />
+    <link rel="stylesheet" href="{% static 'eddig/styles/sass/menu.css' %}">
+    <script defer src="{% static 'eddig/scripts/menu.js' %}"></script>
+</head>
+
+<body>
+    <div class="bode">
+        <div class="container">
+            <div class="image-container">
+                <img src="{% static 'eddig/assets/EddigLogo.png' %}" alt="Logo" id="logo">
+            </div>
+            <div class="button-container">
+                <button class="square" style="display: none;">Settings</button>
+                <div class="rectangular-buttons">
+                    <a class="rectangular" id="play" href="game"></a>
+                    <a class="rectangular" id="ranking" href="ranking"></a>
+                    <a class="rectangular" id="about" href="about"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="memory-game">
+        <div class="wrapper">
+            <canvas id="game"></canvas>
+            <img src="{% static 'eddig/assets/images/overlay.png' %}" alt="overlay" class="overlay" />
+        </div>
+    </section>
+    <div class="sprites">
+        <img src="" alt="player" id="player" />
+        <img src="{% static 'eddig/assets/sprites/grass.png' %}" alt="grass" id="grass" />
+        <img src="{% static 'eddig/assets/sprites/cat.png' %}" alt="cat" id="cat" />
+        <img src="{% static 'eddig/assets/sprites/hen.png' %}" alt="hen" id="hen" />
+        <img src="{% static 'eddig/assets/sprites/duck.png' %}" alt="duck" id="duck" />
+        <img src="{% static 'eddig/assets/sprites/cow.png' %}" alt="cow" id="cow" />
+        <img src="{% static 'eddig/assets/sprites/ghost.png' %}" alt="ghost" id="ghost" />
+        <img src="{% static 'eddig/assets/sprites/bat.png' %}" alt="bat" id="bat" />
+    </div>
+</body>
+
+</html>
