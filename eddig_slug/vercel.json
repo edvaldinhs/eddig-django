@@ -1,13 +1,13 @@
 {
     "builds": [{
-        "src": "eddig_slug/wsgi.py",
+        "src": "eddig_django/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "eddig_slug/wsgi.py"
+            "dest": "eddig_django/wsgi.py"
         }
     ]
 }
