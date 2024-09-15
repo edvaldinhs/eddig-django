@@ -14,16 +14,16 @@ def about(request):
     return render(request, 'about.html')
 
 def ranking(request):
-    players = Player.objects.all().order_by("flips", "-time")
+    players = Player.objects.all().order_by("flips", "time")
     return render(request, "ranking.html", {"players": players})
 
 def basicRank(request): 
-    players = Player.objects.all().order_by("flips", "-time")
+    players = Player.objects.all().order_by("flips", "time")
     return render(request, "basicRank.html", {"players": players})
 
 def get(request):
     if request.method == 'GET':
-        players = Player.objects.all().order_by("flips", "-time").values()
+        players = Player.objects.all().order_by("flips", "time").values()
         return JsonResponse(list(players), safe=False)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
