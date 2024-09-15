@@ -307,6 +307,10 @@ input::placeholder {
   .flips {
     margin-bottom: var(--space-4);
   }
+  .timer {
+    margin-bottom: var(--space-4);
+  }
+
 
   canvas {
     width: 100%;
@@ -401,6 +405,15 @@ input::placeholder {
       top: var(--space-10);
       z-index: 6;
     }
+
+    .timer {
+      font-size: var(--font-size-5xl);
+      color: #ffffff;
+      position: absolute;
+      right: var(--space-10);
+      top: var(--space-10);
+      z-index: 6;
+    }
   
     canvas {
       width: 100%;
@@ -484,6 +497,9 @@ input::placeholder {
     }
   
     .flips {
+      margin-bottom: var(--space-4);
+    }
+    .timer {
       margin-bottom: var(--space-4);
     }
   

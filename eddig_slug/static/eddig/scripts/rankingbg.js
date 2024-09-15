@@ -1,116 +1,3 @@
-let isBlocking = true;
-let isAddedInDB = false;
-const blockedKeys = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]);
-
-const endResult = document.getElementById("end-container");
-endResult.style.display = 'none';
-
-function unBlockKeys() {
-  isBlocking = false;
-}
-
-function submitName() {
-  const name = document.getElementById('user-name');
-  const value = name.value;
-
-  if (value.trim() !== "") {
-    console.log(`<p>Stored Data: ${value}</p>`)
-    document.getElementById('name-container').style.display = 'none';
-    document.querySelector(".name span").textContent = value.toString();
-  }
-  unBlockKeys();
-}
-
-console.log("SSEA2@");
-
-function submitPlayerData(flips, time) {
-  if (!isAddedInDB) {
-    isAddedInDB = true;
-    const name = document.getElementById('user-name').value;
-
-    fetch('/add/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-      },
-      body: JSON.stringify({
-        name: name,
-        flips: flips,
-        time: time
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        const responseMessage = document.getElementById('responseMessage');
-        if (data.status === 'success') {
-          responseMessage.textContent = "Player added successfully!";
-          responseMessage.style.color = "green";
-          document.getElementById('playerForm').reset();
-        } else {
-          responseMessage.textContent = "Error: " + data.message;
-          responseMessage.style.color = "red";
-        }
-      })
-      .catch(error => {
-        const responseMessage = document.getElementById('responseMessage');
-        responseMessage.textContent = "Request failed: " + error;
-        responseMessage.style.color = "red";
-      });
-  }
-
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-}
-
-function navegarParaUrl(url) {
-  window.location.href = url;
-}
-
-var elem = document.documentElement;
-
-function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
-  }
-}
-
-// ---------------------||------------------------
-
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-canvas.width = 1280 * 1.3;
-canvas.height = 720 * 1.3;
-
-function myFunction(x) {
-  if (x.matches) {
-    openFullscreen();
-  }
-}
-var x = window.matchMedia("(min-width: 720px)")
-document.getElementById("c").addEventListener("click", function () {
-  myFunction(x);
-});
-
-
-
-
 document.addEventListener('selectstart', (e) => {
   e.preventDefault();
 });
@@ -121,109 +8,15 @@ document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 });
 
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth * 0.9;
+canvas.height = window.innerHeight * 0.9;
+
 class InputListener {
   constructor(game) {
     this.game = game;
-    this.keysPressed = new Set();
-    this.keyReleased = new Set();
-
-    window.addEventListener("keydown", (e) => {
-      if (!isBlocking) {
-        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-          e.preventDefault();
-        }
-        this.keysPressed.add(e.key);
-        if (e.key === "c" && !this.game.player.isCPressed) {
-          this.game.player.isCPressed = true;
-          this.game.player.frameX = 0;
-        }
-        this.game.updateKeys(this.keysPressed);
-      } else {
-        console.log("Blocked");
-      }
-    });
-
-    window.addEventListener("keyup", (e) => {
-      this.keysPressed.delete(e.key);
-      this.keyReleased.add(e.key);
-      this.game.updateKeys(this.keysPressed);
-    });
-
-    const upButton = document.querySelector("#up");
-    const downButton = document.querySelector("#down");
-    const leftButton = document.querySelector("#left");
-    const rightButton = document.querySelector("#right");
-    const cButton = document.querySelector("#c");
-
-    upButton.addEventListener("mousedown", () =>
-      this.simulateKeyPress("ArrowUp")
-    );
-    downButton.addEventListener("mousedown", () =>
-      this.simulateKeyPress("ArrowDown")
-    );
-    leftButton.addEventListener("mousedown", () =>
-      this.simulateKeyPress("ArrowLeft")
-    );
-    rightButton.addEventListener("mousedown", () =>
-      this.simulateKeyPress("ArrowRight")
-    );
-    cButton.addEventListener("mousedown", () => this.simulateKeyPress("c"));
-
-    upButton.addEventListener("touchstart", () =>
-      this.simulateKeyPress("ArrowUp")
-    );
-    downButton.addEventListener("touchstart", () =>
-      this.simulateKeyPress("ArrowDown")
-    );
-    leftButton.addEventListener("touchstart", () =>
-      this.simulateKeyPress("ArrowLeft")
-    );
-    rightButton.addEventListener("touchstart", () =>
-      this.simulateKeyPress("ArrowRight")
-    );
-    cButton.addEventListener("touchstart", () => this.simulateKeyPress("c"));
-
-    upButton.addEventListener("mouseup", () =>
-      this.simulateKeyRelease("ArrowUp")
-    );
-    downButton.addEventListener("mouseup", () =>
-      this.simulateKeyRelease("ArrowDown")
-    );
-    leftButton.addEventListener("mouseup", () =>
-      this.simulateKeyRelease("ArrowLeft")
-    );
-    rightButton.addEventListener("mouseup", () =>
-      this.simulateKeyRelease("ArrowRight")
-    );
-    cButton.addEventListener("mouseup", () => this.simulateKeyRelease("c"));
-
-    upButton.addEventListener("touchend", () =>
-      this.simulateKeyRelease("ArrowUp")
-    );
-    downButton.addEventListener("touchend", () =>
-      this.simulateKeyRelease("ArrowDown")
-    );
-    leftButton.addEventListener("touchend", () =>
-      this.simulateKeyRelease("ArrowLeft")
-    );
-    rightButton.addEventListener("touchend", () =>
-      this.simulateKeyRelease("ArrowRight")
-    );
-    cButton.addEventListener("touchend", () => this.simulateKeyRelease("c"));
-  }
-
-  simulateKeyPress(key) {
-    const event = new KeyboardEvent("keydown", {
-      key: key,
-    });
-    window.dispatchEvent(event);
-  }
-
-  simulateKeyRelease(key) {
-    const event = new KeyboardEvent("keyup", {
-      key: key,
-    });
-    window.dispatchEvent(event);
   }
 }
 
@@ -412,13 +205,12 @@ class Animal {
               break;
             }
           }
+
           if (withinBounds) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
           } else {
-            this.frameY = 5;
-
             this.directionX = 0;
             this.directionY = 0;
             this.stopped = true;
@@ -437,6 +229,7 @@ class Animal {
           }, 3000);
         }
       } else {
+        // Handle stopping logic
         for (let grass of this.game.grass) {
           const distance = Math.sqrt(
             (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
@@ -447,6 +240,7 @@ class Animal {
           }
         }
       }
+
       this.frameCount++;
       if (this.frameCount >= this.frameDelay) {
         this.frameCount = 0;
@@ -468,6 +262,7 @@ class Animal {
       }
     }
   }
+
 
   randomizeDirection() {
     this.stopped = false;
@@ -479,6 +274,7 @@ class Animal {
     this.moveCount = 0;
     this.maxMoveCount = Math.floor(Math.random() * 100) + 50;
   }
+
 }
 
 class Hen extends Animal {
@@ -487,98 +283,7 @@ class Hen extends Animal {
     this.frameY = 0;
     this.frameDelay = 3.2;
   }
-  update() {
-    if (this.jumping) {
-      this.y -= this.jumpSpeed;
-      this.jumpSpeed -= this.gravity;
-      if (this.y >= this.originalY) {
-        this.y = this.originalY;
-        this.jumping = false;
-      }
-    } else {
-      if (!this.stopped) {
-        if (this.moveCount < this.maxMoveCount) {
-          const nextX = this.x + this.directionX * this.speed;
-          const nextY = this.y + this.directionY * this.speed;
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
-          }
-          if (withinBounds) {
-            this.x = nextX;
-            this.y = nextY;
-            this.moveCount++;
-          } else {
-            this.frameY = 6;
 
-            this.directionX = 0;
-            this.directionY = 0;
-            this.stopped = true;
-
-            setTimeout(() => {
-              this.randomizeDirection();
-            }, 3000);
-          }
-        } else {
-          this.directionX = 0;
-          this.directionY = 0;
-          this.stopped = true;
-
-          setTimeout(() => {
-            this.randomizeDirection();
-          }, 3000);
-        }
-      } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
-        }
-      }
-      this.frameCount++;
-      if (this.frameCount >= this.frameDelay) {
-        this.frameCount = 0;
-        if (this.frameX < this.maxFrame - 1) {
-          this.frameX++;
-        } else {
-          this.frameX = 0;
-        }
-      }
-      if (this.directionX < 0) {
-        this.frameY = 3;
-      } else if (this.directionX > 0) {
-        this.frameY = 1;
-      } else if (this.directionY < 0) {
-        this.frameY = 2;
-      } else if (this.directionY > 0) {
-        this.frameY = 0;
-      }
-    }
-  }
-}
-
-class Cat extends Animal {
-  constructor(game, x, y) {
-    super(game, x, y, "cat");
-    this.width = 80;
-    this.height = 80;
-    this.spriteWidth = 32;
-    this.spriteHeight = 32;
-    this.frameY = 0;
-    this.frameDelay = 6;
-  }
   update() {
     if (this.jumping) {
       this.y -= this.jumpSpeed;
@@ -593,19 +298,22 @@ class Cat extends Animal {
           const nextX = this.x + this.directionX * this.speed;
           const nextY = this.y + this.directionY * this.speed;
 
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
           }
-          if (withinBounds) {
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
@@ -630,16 +338,21 @@ class Cat extends Animal {
           }, 3000);
         }
       } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
         }
       }
+
+      // Frame update logic
       this.frameCount++;
       if (this.frameCount >= this.frameDelay) {
         this.frameCount = 0;
@@ -649,6 +362,8 @@ class Cat extends Animal {
           this.frameX = 0;
         }
       }
+
+      // Set frameY based on direction
       if (this.directionX < 0) {
         this.frameY = 3;
       } else if (this.directionX > 0) {
@@ -661,6 +376,113 @@ class Cat extends Animal {
     }
   }
 }
+
+
+class Cat extends Animal {
+  constructor(game, x, y) {
+    super(game, x, y, "cat");
+    this.width = 80;
+    this.height = 80;
+    this.spriteWidth = 32;
+    this.spriteHeight = 32;
+    this.frameY = 0;
+    this.frameDelay = 6;
+  }
+
+  update() {
+    if (this.jumping) {
+      this.y -= this.jumpSpeed;
+      this.jumpSpeed -= this.gravity;
+      if (this.y >= this.originalY) {
+        this.y = this.originalY;
+        this.jumping = false;
+      }
+    } else {
+      if (!this.stopped) {
+        if (this.moveCount < this.maxMoveCount) {
+          const nextX = this.x + this.directionX * this.speed;
+          const nextY = this.y + this.directionY * this.speed;
+
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
+          }
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
+            this.x = nextX;
+            this.y = nextY;
+            this.moveCount++;
+          } else {
+            this.frameY = 5;
+
+            this.directionX = 0;
+            this.directionY = 0;
+            this.stopped = true;
+
+            setTimeout(() => {
+              this.randomizeDirection();
+            }, 3000);
+          }
+        } else {
+          this.directionX = 0;
+          this.directionY = 0;
+          this.stopped = true;
+
+          setTimeout(() => {
+            this.randomizeDirection();
+          }, 3000);
+        }
+      } else {
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
+        }
+      }
+
+      // Frame update logic
+      this.frameCount++;
+      if (this.frameCount >= this.frameDelay) {
+        this.frameCount = 0;
+        if (this.frameX < this.maxFrame - 1) {
+          this.frameX++;
+        } else {
+          this.frameX = 0;
+        }
+      }
+
+      // Set frameY based on direction
+      if (this.directionX < 0) {
+        this.frameY = 3;
+      } else if (this.directionX > 0) {
+        this.frameY = 1;
+      } else if (this.directionY < 0) {
+        this.frameY = 2;
+      } else if (this.directionY > 0) {
+        this.frameY = 0;
+      }
+    }
+  }
+}
+
+
 
 class Bat extends Animal {
   constructor(game, x, y) {
@@ -685,25 +507,27 @@ class Bat extends Animal {
         if (this.moveCount < this.maxMoveCount) {
           const nextX = this.x + this.directionX * this.speed;
           const nextY = this.y + this.directionY * this.speed;
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
+
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
           }
-          if (withinBounds) {
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
           } else {
-            this.frameY = 0;
-
             this.directionX = 0;
             this.directionY = 0;
             this.stopped = true;
@@ -722,14 +546,17 @@ class Bat extends Animal {
           }, 3000);
         }
       } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
         }
       }
       this.frameCount++;
@@ -777,27 +604,33 @@ class Cow extends Animal {
         if (this.moveCount < this.maxMoveCount) {
           const nextX = this.x + this.directionX * this.speed;
           const nextY = this.y + this.directionY * this.speed;
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
+
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
           }
-          if (withinBounds) {
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
           } else {
-            this.frameY = 4;
+            this.frameY = 5;
+
             this.directionX = 0;
             this.directionY = 0;
             this.stopped = true;
+
             setTimeout(() => {
               this.randomizeDirection();
             }, 3000);
@@ -806,21 +639,27 @@ class Cow extends Animal {
           this.directionX = 0;
           this.directionY = 0;
           this.stopped = true;
+
           setTimeout(() => {
             this.randomizeDirection();
           }, 3000);
         }
       } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
         }
       }
+
+      // Frame update logic
       this.frameCount++;
       if (this.frameCount >= this.frameDelay) {
         this.frameCount = 0;
@@ -860,24 +699,28 @@ class Duck extends Animal {
         if (this.moveCount < this.maxMoveCount) {
           const nextX = this.x + this.directionX * this.speed;
           const nextY = this.y + this.directionY * this.speed;
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
+
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
           }
-          if (withinBounds) {
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
           } else {
-            this.frameY = 6;
+            this.frameY = 4;
 
             this.directionX = 0;
             this.directionY = 0;
@@ -897,16 +740,21 @@ class Duck extends Animal {
           }, 3000);
         }
       } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
         }
       }
+
+      // Frame update logic
       this.frameCount++;
       if (this.frameCount >= this.frameDelay) {
         this.frameCount = 0;
@@ -916,8 +764,9 @@ class Duck extends Animal {
           this.frameX = 0;
         }
       }
+      // Set frameY based on direction
       if (this.directionX < 0) {
-        this.frameY = 5;
+        this.frameY = 3;
       } else if (this.directionX > 0) {
         this.frameY = 1;
       } else if (this.directionY < 0) {
@@ -953,24 +802,28 @@ class Ghost extends Animal {
         if (this.moveCount < this.maxMoveCount) {
           const nextX = this.x + this.directionX * this.speed;
           const nextY = this.y + this.directionY * this.speed;
-          let withinBounds = false;
-          for (let grass of this.game.grass) {
-            if (
-              nextX >= grass.x &&
-              nextX <= grass.x + grass.width &&
-              nextY >= grass.y &&
-              nextY <= grass.y + grass.height
-            ) {
-              withinBounds = true;
-              break;
-            }
+
+          // Check if canvas is properly initialized
+          if (!this.game || !canvas) {
+            console.error("Canvas is not properly initialized.");
+            return;
           }
-          if (withinBounds) {
+
+          const canvasWidth = canvas.width;
+          const canvasHeight = canvas.height;
+
+          // Check if next position is within canvas bounds
+          if (
+            nextX >= 0 &&
+            nextX + this.width <= canvasWidth &&
+            nextY >= 0 &&
+            nextY + this.height <= canvasHeight
+          ) {
             this.x = nextX;
             this.y = nextY;
             this.moveCount++;
           } else {
-            this.frameY = 0;
+            this.frameY = 5;
 
             this.directionX = 0;
             this.directionY = 0;
@@ -990,16 +843,21 @@ class Ghost extends Animal {
           }, 3000);
         }
       } else {
-        for (let grass of this.game.grass) {
-          const distance = Math.sqrt(
-            (this.x - grass.x) ** 2 + (this.y - grass.y) ** 2
-          );
-          if (distance <= 50) {
-            this.randomizeDirection();
-            break;
-          }
+        // Handle stopping logic
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+
+        if (
+          this.x <= 0 ||
+          this.x + this.width >= canvasWidth ||
+          this.y <= 0 ||
+          this.y + this.height >= canvasHeight
+        ) {
+          this.randomizeDirection();
         }
       }
+
+      // Frame update logic
       this.frameCount++;
       if (this.frameCount >= this.frameDelay) {
         this.frameCount = 0;
@@ -1066,63 +924,49 @@ class Grass {
   }
 }
 
+function generateAnimal(game) {
+  const canvasWidth = 800;  // Adjust based on your canvas size
+  const canvasHeight = 600; // Adjust based on your canvas size
+  const xPosition = Math.floor(Math.random() * canvasWidth);
+  const yPosition = Math.floor(Math.random() * canvasHeight);
+
+  const ANIMALSCLASSES = {
+    1: Hen,
+    2: Cat,
+    3: Duck,
+    4: Cow,
+    5: Ghost,
+    6: Bat,
+  };
+
+  const AnimalClass = ANIMALSCLASSES[parseInt((Math.random() * 6) + 1)];
+
+  if (AnimalClass) {
+    const animal = new AnimalClass(this, xPosition, yPosition);
+    game.animals.push(animal);
+  }
+}
+
 class Game {
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.topMargin = 200;
     this.flips = 0;
-    this.seconds = 0;
-    this.timer;
-    this.flipsWrapper = document.querySelector(".flips span");
-    this.flipsEndGame = document.querySelector(".flips2 span");
-    this.timerWrapper = document.querySelector(".timer span");
-    this.timerEndGame = document.querySelector(".timer2 span");
     this.pressedKeys = new Set();
     this.input = new InputListener(this);
     this.player = new Player(this);
+    this.grassQuantity = 12;
     this.grass = [];
     this.gameObjects = [];
     this.animals = [];
     this.detections = 0;
     this.generatedAnimals = [];
     this.lastInteractedGrassID = undefined;
-    this.grassQuantityToEnd = -1;
-  }
-
-  finishGame() {
-    this.stopTimer();
-    submitPlayerData(this.flips, this.seconds);
-    endResult.style.display = 'flex';
-  }
-
-  verifyEndGame() {
-    if (this.grassQuantityToEnd >= this.grass.length) {
-      this.finishGame();
-    }
   }
 
   updateKeys(key) {
     this.pressedKeys = key;
-  }
-
-  startTimer() {
-    if (!this.timer) {
-      this.timer = setInterval(() => {
-        this.seconds++;
-        this.timerWrapper.textContent = this.seconds
-          .toString()
-          .padStart(2, "0");
-        this.timerEndGame.textContent = this.seconds
-          .toString()
-          .padStart(2, "0");
-      }, 1000);
-    }
-  }
-
-  stopTimer() {
-    clearInterval(this.timer);
-    this.timer = null;
   }
 
   resetGrasses() {
@@ -1160,15 +1004,8 @@ class Game {
         !this.waitingToDelete
       ) {
         if (this.player.isCPressed) {
-          this.startTimer();
           const AnimalClass = ANIMALSCLASSES[grass.randomNumber];
           this.flips++;
-          this.flipsWrapper.textContent = this.flips
-            .toString()
-            .padStart(2, "0");
-          this.flipsEndGame.textContent = this.flips
-            .toString()
-            .padStart(2, "0");
 
           if (AnimalClass) {
             const animal = new AnimalClass(this, grass.x, grass.y);
@@ -1176,7 +1013,6 @@ class Game {
 
             this.generatedAnimals.push({ animal, grass });
             grass.interacted = true;
-            this.grassQuantityToEnd++;
           }
 
           if (
@@ -1203,7 +1039,6 @@ class Game {
                   animal.y = associatedGrass.y;
                 }
                 generatedAnimalCount--;
-                this.grassQuantityToEnd--;
               }
               this.waitingToDelete = false;
               this.grass.forEach((grass) => {
@@ -1246,9 +1081,18 @@ class Game {
   }
   play() {
     const values = [1, 2, 3, 4, 5, 6];
-    const grassPerValue = 2;
+    const grassPerValue = 0;
     const shuffledValues = values.sort(() => Math.random() - 0.5);
     let grasses = [];
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+    generateAnimal(this);
+
 
     for (const value of shuffledValues) {
       for (let i = 0; i < grassPerValue; i++) {
@@ -1263,9 +1107,9 @@ class Game {
       grass.calculatePosition(index);
       this.grass.push(grass);
     });
-    this.grassQuantityToEnd = 0;
   }
 }
+
 window.addEventListener("load", () => {
   const game = new Game(canvas.width, canvas.height);
   game.resetGrasses();
@@ -1275,20 +1119,6 @@ window.addEventListener("load", () => {
     game.detectInteraction();
     game.render(ctx);
     requestAnimationFrame(animate);
-    game.verifyEndGame();
   };
   animate();
 });
-
-function handleTapHold(event) {
-  console.log('Imagem pressionada por um tempo longo');
-}
-const imagens = document.querySelectorAll('img');
-imagens.forEach(img => {
-  img.addEventListener('taphold', handleTapHold);
-});
-imagens.forEach(img => {
-  img.removeEventListener('taphold', handleTapHold);
-});
-
-
