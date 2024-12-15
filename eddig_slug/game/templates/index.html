@@ -13,6 +13,12 @@
 
 <body>
     <div class="bode">
+        {% if user.is_authenticated %}
+        <form id="logoutForm" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button id="logoutButton">Logout</button>
+        </form>
+        {% endif %}
         <div class="container">
             <div class="image-container">
                 <img src="{% static 'eddig/assets/EddigLogo.png' %}" alt="Logo" id="logo">

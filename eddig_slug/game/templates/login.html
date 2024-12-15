@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game RPG - Eddig</title>
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/about.css' %}" />
+  <link rel="icon" type="image/png" href="{% static 'eddig/assets/ico.png' %}" />
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/menu.css' %}">
+  <link rel="stylesheet" href="{% static 'eddig/styles/sass/login.css' %}">
+  <script defer src="{% static 'eddig/scripts/menu.js' %}"></script>
+</head>
+
+<body>
+  <section class="controllers">
+    <div class="wrapper">
+      <a href="/">
+        <button type="button" id="home">
+          <img src="{% static 'eddig/assets/buttons/exit.png' %}" alt="">
+        </button>
+      </a>
+    </div>
+  </section>
+  <section class="about">
+    <div class="wrapper">
+      <div class="box">
+        <div class="aboutlogo">
+          <img src="{% static 'eddig/assets/loginLogo.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="wrappper">
+      {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+        <form id="loginForm" method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <label for="username">Usuário:</label>
+          <input type="text" id="username" name="username" required>
+          <br>
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
+          <br>
+          <button type="submit" id="submitButton">Entrar</button>
+        </form>
+    </div>
+  </section>
+  </section>
+  <section id="memory-game">
+    <div class="wrapper">
+      <canvas id="game"></canvas>
+      <img src="{% static 'eddig/assets/images/overlay.png' %}" alt="overlay" class="overlay" />
+    </div>
+  </section>
+  <div class="sprites">
+    <img src="" alt="player" id="player" />
+    <img src="{% static 'eddig/assets/sprites/grass.png' %}" alt="grass" id="grass" />
+    <img src="{% static 'eddig/assets/sprites/cat.png' %}" alt="cat" id="cat" />
+    <img src="{% static 'eddig/assets/sprites/hen.png' %}" alt="hen" id="hen" />
+    <img src="{% static 'eddig/assets/sprites/duck.png' %}" alt="duck" id="duck" />
+    <img src="{% static 'eddig/assets/sprites/cow.png' %}" alt="cow" id="cow" />
+    <img src="{% static 'eddig/assets/sprites/ghost.png' %}" alt="ghost" id="ghost" />
+    <img src="{% static 'eddig/assets/sprites/bat.png' %}" alt="bat" id="bat" />
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('#loginForm');
+  
+      form.addEventListener('submit', (event) => {
+        const username = document.querySelector('#username').value.trim();
+        const password = document.querySelector('#password').value.trim();
+        localStorage.setItem('userName', username);
+        
+        if (!username || !password) {
+          alert('Por favor, preencha todos os campos!');
+          event.preventDefault();
+          return;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -297,6 +297,9 @@ input::placeholder {
 #memory-game .flips {
   margin-bottom: var(--space-4);
 }
+#memory-game .timer {
+  margin-bottom: var(--space-4);
+}
 #memory-game canvas {
   width: 100%;
   background: url("../../assets/images/background.jpg") center/cover;
@@ -375,6 +378,14 @@ input::placeholder {
     top: var(--space-10);
     z-index: 6;
   }
+  #memory-game .timer {
+    font-size: var(--font-size-5xl);
+    color: #ffffff;
+    position: absolute;
+    right: var(--space-10);
+    top: var(--space-10);
+    z-index: 6;
+  }
   #memory-game canvas {
     width: 100%;
     background: url("../../assets/images/background.jpg") center/cover;
@@ -444,6 +455,9 @@ input::placeholder {
     align-items: flex-start;
   }
   #memory-game .flips {
+    margin-bottom: var(--space-4);
+  }
+  #memory-game .timer {
     margin-bottom: var(--space-4);
   }
   #memory-game canvas {

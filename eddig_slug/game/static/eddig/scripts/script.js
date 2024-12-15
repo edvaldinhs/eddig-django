@@ -1291,4 +1291,6 @@ imagens.forEach(img => {
   img.removeEventListener('taphold', handleTapHold);
 });
 
-
+window.onload = () => {
+  document.getElementById('user-name').value = localStorage.getItem('userName');
+}
