@@ -1,6 +1,6 @@
 <p id="title" align="center">
   <a href="#title">
-    <img width="80" height="80" src="./assets/ico.png" height="128">
+    <img width="80" height="80" src="./eddig_slug/static/eddig/assets/ico.png" height="128">
     <h1 align="center">Eddig - RPG Memory Game</h1>
   </a>
 </p>
