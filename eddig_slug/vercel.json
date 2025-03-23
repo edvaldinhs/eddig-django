@@ -21,10 +21,6 @@
       {
         "src": "/static/(.*)",
         "dest": "/static/$1"
-      },{
-        "src": "/(.*)",
-        "dest": "/server.js",
-        "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
       }
     ]
     
