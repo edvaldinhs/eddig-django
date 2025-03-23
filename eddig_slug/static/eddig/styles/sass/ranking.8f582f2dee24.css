@@ -1,0 +1,153 @@
+html, body {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-image: url("../../assets/images/woodbg.6c776fa46839.png");
+  background-repeat: repeat;
+  background-position: top left;
+}
+
+.controllers .wrapper {
+  position: absolute;
+  z-index: 8;
+}
+.controllers .wrapper button {
+  margin: 20px 0px 0px 20px;
+  height: 80%;
+  width: 80%;
+}
+.controllers .wrapper button:hover {
+  height: 100%;
+  width: 100%;
+  cursor: none;
+}
+.controllers .wrapper #home img {
+  height: 100%;
+  width: 100%;
+}
+
+#memory-game {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+#memory-game canvas {
+  min-height: 100vh;
+  width: 100vw;
+  background: url() center/cover !important;
+  border-radius: var(--radii-sm);
+}
+
+.rankinglogo {
+  margin: auto;
+  width: 34vw;
+}
+.rankinglogo img {
+  height: 100%;
+  width: 100%;
+}
+
+.rank {
+  margin-top: 40px;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 100%;
+}
+
+table {
+  width: 60%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px auto;
+}
+
+table,
+th,
+td {
+  border: none;
+}
+
+th,
+td {
+  padding: 0;
+  text-align: center;
+}
+
+th {
+  background-color: #ff7ccb;
+  color: white;
+  padding: 10px 0 10px 20px;
+}
+
+.nameth {
+  padding: 10px 90px 10px 70px;
+}
+
+.timeth {
+  padding-right: 20px;
+}
+
+th p {
+  width: 50px;
+}
+
+td {
+  background-color: #ff7ccb;
+  border-radius: 25px;
+  padding: 0;
+  position: relative;
+}
+
+tr {
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  height: 55px;
+  background-color: #ffa8dc;
+  border-radius: 20px;
+  padding: 15px 0 15px 60px;
+  box-sizing: border-box;
+}
+
+.name {
+  font-size: 18px;
+  color: black;
+  margin-right: 100px;
+  text-align: center;
+  flex: 1;
+}
+
+.name p {
+  margin: 0;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #ff7ccb;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin: 0 10px;
+  color: white;
+}/*# sourceMappingURL=ranking.css.map */

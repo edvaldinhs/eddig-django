@@ -1,0 +1,97 @@
+.controllers .wrapper {
+  position: absolute;
+  z-index: 8;
+}
+.controllers .wrapper button {
+  margin: 20px 0px 0px 20px;
+  height: 80%;
+  width: 80%;
+}
+.controllers .wrapper button:hover {
+  height: 100%;
+  width: 100%;
+  cursor: none;
+}
+.controllers .wrapper #home img {
+  height: 100%;
+  width: 100%;
+}
+
+.aboutlogo {
+  margin: auto;
+  height: 28vh;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.aboutlogo img {
+  height: 100%;
+  width: 100%;
+}
+
+.box {
+  width: 100%;
+}
+
+.about {
+  margin-top: 40px;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+}
+
+.wrappper {
+  position: absolute;
+  width: 100%;
+  margin: calc(28vh + 30px) auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 7;
+}
+.wrappper .cred {
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+}
+.wrappper .cred h2 {
+  margin-bottom: 20px;
+}
+.wrappper .cred .container {
+  display: flex;
+}
+.wrappper .cred .container .divisor {
+  width: 1px;
+  background: black;
+  margin: 0 10px 0 10px;
+}
+.wrappper .copyright {
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 930px) {
+  #memory-game {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  #memory-game .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #memory-game canvas {
+    width: 100%;
+    background: url("../../assets/images/background.jpg") center/cover;
+    border-radius: var(--radii-sm);
+  }
+  #memory-game .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}/*# sourceMappingURL=about.01ba4ce72aa5.css.map */
