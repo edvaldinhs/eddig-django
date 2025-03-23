@@ -44,6 +44,8 @@ on the other hand you can play the old version of the game with the link below:
 
 https://eddig.netlify.app/
 
+<br>
+
 ## 🧑🏻‍💻&nbsp; Getting Started
 
 Clone the project and access the project folder
@@ -67,7 +69,6 @@ $ pip install -r requirements.txt
 $ py manage.py runserver
 ```
 
-<br>
 <br>
 
 ## 💻&nbsp; Project
