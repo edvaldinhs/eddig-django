@@ -36,26 +36,48 @@ Dev Dependencies:
 
 ## 🎮&nbsp; Gaming
 
-You can play and test the game with the link below
+You can play and test the Ranking version of the game with the link below
 
 https://eddig.vercel.app/
+
+on the other hand you can play the old version of the game with the link below
+
+https://eddig.netlify.app/
 
 ## 🧑🏻‍💻&nbsp; Getting Started
 
 Clone the project and access the project folder
 
 ```bash
-$ git clone https://github.com/edvaldinhs/Eddig
-$ cd Eddig
+$ git clone [https://github.com/edvaldinhs/Eddig](https://github.com/edvaldinhs/eddig-django)
+$ cd eddig-django
 ```
 
-To run it, open `index.html`
+Initiate a virtual environment
+Windows:
+```bash
+$ python -m venv .venv
+$ source .venv/Scripts/activate
+```
+
+Linux:
+```bash
+$ python -m venv .venv
+$ source .venv/bin/activate
+```
+
+Install dependencies and run the project
+```bash
+$ cd eddig_slug
+$ pip install -r requirements.txt
+$ py manage.py runserver
+```
 
 <br>
 
 ## 💻&nbsp; Project
 
-A project developed for the PPI discipline with the objective of improving the techniques of HTML, CSS and Javascript, feat [Marcelo Júnior](https://github.com/MimMarcelo)
+A project developed for the PPI discipline with the objective of improving the techniques of python, django, HTML, CSS and Javascript, feat [Marcelo Júnior](https://github.com/MimMarcelo)
 
 <br>
 
