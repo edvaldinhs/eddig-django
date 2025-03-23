@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
 import json
 
 def index(request):
@@ -64,24 +66,41 @@ class CustomLoginView(LoginView):
             return render(request, self.template_name)
 
 @csrf_exempt
+@login_required
 def add(request):
     if request.method == 'POST':
         try:
+            # Parse JSON data
             data = json.loads(request.body)
 
-            player = Player(
+            # Validate required fields
+            required_fields = ['name', 'flips', 'time']
+            if not all(field in data for field in required_fields):
+                return JsonResponse({'status': 'error', 'message': 'Missing required fields'}, status=400)
+
+            # Create and save player instance
+            player = Player.objects.create(
                 name=data['name'],
-                flips=data['flips'],
-                time=data['time'],
-                user=request.user
+                flips=int(data['flips']),  # Ensure flips is an integer
+                time=float(data['time']),  # Ensure time is a float
+                user=request.user  # Associate with logged-in user
             )
-            player.save()
-            return JsonResponse({'status': 'success'}, status=201)
+
+            return JsonResponse({'status': 'success', 'player_id': player.id}, status=201)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON format'}, status=400)
+        except ValueError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid data type'}, status=400)
         except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
 def delete(request, id):
-    player=Player.objects.get(id=id)
-    player.delete()
+    try:
+        player = Player.objects.get(id=id)
+        player.delete()
+    except Player.DoesNotExist:
+        raise Http404("Player not found")
     return redirect("/")
