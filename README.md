@@ -49,7 +49,7 @@ https://eddig.netlify.app/
 Clone the project and access the project folder
 
 ```bash
-$ git clone [https://github.com/edvaldinhs/Eddig](https://github.com/edvaldinhs/eddig-django)
+$ git clone https://github.com/edvaldinhs/eddig-django
 $ cd eddig-django
 ```
 
