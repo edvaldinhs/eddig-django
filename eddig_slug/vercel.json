@@ -1,9 +1,4 @@
 {
-    "build": {
-    "env": {
-      "PYTHON_VERSION": "3.10"
-    }
-  },
     "builds": [
       {
         "src": "build_files.sh",
