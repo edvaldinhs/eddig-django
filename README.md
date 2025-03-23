@@ -36,11 +36,11 @@ Dev Dependencies:
 
 ## 🎮&nbsp; Gaming
 
-You can play and test the Ranking version of the game with the link below
+You can play and test the Ranking version of the game with the link below:
 
 https://eddig.vercel.app/
 
-on the other hand you can play the old version of the game with the link below
+on the other hand you can play the old version of the game with the link below:
 
 https://eddig.netlify.app/
 
@@ -54,16 +54,10 @@ $ cd eddig-django
 ```
 
 Initiate a virtual environment
-Windows:
+
 ```bash
 $ python -m venv .venv
 $ source .venv/Scripts/activate
-```
-
-Linux:
-```bash
-$ python -m venv .venv
-$ source .venv/bin/activate
 ```
 
 Install dependencies and run the project
