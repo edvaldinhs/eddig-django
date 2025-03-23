@@ -40,7 +40,7 @@ You can play and test the Ranking version of the game with the link below:
 
 https://eddig.vercel.app/
 
-on the other hand you can play the old version of the game with the link below:
+on the other hand, you can play the old version of the game with the link below:
 
 https://eddig.netlify.app/
 
