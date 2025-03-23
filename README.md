@@ -68,6 +68,7 @@ $ py manage.py runserver
 ```
 
 <br>
+<br>
 
 ## 💻&nbsp; Project
 
@@ -75,7 +76,7 @@ A project developed for the PPI discipline with the objective of improving the t
 
 <br>
 
-## 🧑🏻&nbsp; Authors
+## 🤝&nbsp; Team
 
 <p align="center">
     <img width="20%" src="https://github.com/edvaldinhs.png" alt="Edvaldo Henrique">
