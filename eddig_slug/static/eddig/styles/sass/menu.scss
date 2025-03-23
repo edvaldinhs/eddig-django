@@ -1,0 +1,480 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: url("/static/eddig/assets/cursor.png"), auto;
+}
+
+:root {
+    --colors-memory-ligth: #f6f8fc;
+    --colors-memory-medium: #e9ebf0;
+    --colors-memory-dark: #0d1e2f;
+    --colors-red: #ff5350;
+    --colors-yellow: #ffc300;
+
+    --colors-gray-600: #8b9296;
+    --colors-black: #000000;
+    --colors-white: #ffffff;
+
+    --space-px: 1px;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-9: 2.25rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-14: 3.5rem;
+    --space-16: 4rem;
+    --space-18: 4.5rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-26: 6.5rem;
+    --space-28: 7rem;
+    --space-32: 8rem;
+    --space-36: 9rem;
+    --space-40: 10rem;
+    --space-50: 12.5rem;
+    --space-64: 16rem;
+    --space-80: 20rem;
+
+    --font-size-xxs: 0.625rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-4xl: 2rem;
+    --font-size-5xl: 2.25rem;
+    --font-size-6xl: 3rem;
+    --font-size-7xl: 4rem;
+    --font-size-8xl: 4.5rem;
+    --font-size-9xl: 6rem;
+
+    --font-weight-light: 300;
+    --font-weight-medium: 400;
+    --font-weight-bold: bold;
+
+    --line-height-shorter: 90%;
+    --line-height-short: 110%;
+    --line-height-base: 130%;
+    --line-height-tall: 160%;
+
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+    --border-width-heavy: 8px;
+
+    --radii-xs: 2.5px;
+    --radii-sm: 4px;
+    --radii-md: 10px;
+    --radii-lg: 20px;
+    --radii-full: 999999px;
+
+    --opacity-default: 100%;
+    --opacity-semi-opaque: 90%;
+    --opacity-intense: 75%;
+    --opacity-medium: 50%;
+    --opacity-light: 25%;
+    --opacity-semi-transparent: 10%;
+
+    --z-index-very-hide: -100;
+    --z-index-hide: -1;
+    --z-index-overlay: 9995;
+    --z-index-modal: 9999;
+}
+
+@media screen and (max-width: 1080px) {
+    html {
+        font-size: 93.75%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    html {
+        font-size: 87.5%;
+    }
+}
+
+@font-face {
+    font-family: "Day Dream";
+    src: url("../../assets/fonts/Daydream.ttf");
+}
+
+body {
+    width: 100%;
+    background: url("/static/eddig/assets/icons/background.svg") var(--colors-memory-light) no-repeat content-box fixed;
+    // talvez mudar
+    background-size: auto 80%;
+    background-position: -20vh -20vh;
+}
+
+body,
+input,
+textarea,
+button {
+    font-size: var(--font-size-sm);
+    color: var(--colors-memory-dark);
+    line-height: var(--line-height-tall);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: var(--line-height-shorter);
+}
+
+button {
+    border: none;
+    background: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+::selection {
+    color: var(--colors-memory-light);
+    background: var(--colors-red);
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--colors-gray-600);
+    border-radius: var(--radii-full);
+    border: 4px solid var(--colors-memory-light);
+}
+
+a,
+img,
+svg,
+button,
+iframe,
+input::placeholder {
+    user-select: none;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#memory-game {
+    width: 100%;
+    position: relative;
+    z-index: 1; 
+}
+
+#memory-game .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#memory-game canvas {
+    width: 100%;
+    background: url("../../assets/images/background.jpg") center/cover;
+    border-radius: var(--radii-sm);
+}
+
+#memory-game .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sprites img {
+    display: none;
+}
+
+.bode {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+
+    #logoutButton {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 9999;
+        padding: 0.75rem 1.5rem;
+        background-color: #e57373;
+        color: #fff;
+        border: 3px solid #fff;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transform: rotate(-3deg);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+        transition: background-color 0.3s, transform 0.3s;
+      
+        &:hover {
+          background-color: #ef5350;
+          transform: rotate(-3deg) scale(1.05);
+        }
+      
+        &:active {
+          background-color: #d32f2f;
+          transform: rotate(-2deg);
+        }
+      }
+      
+
+    .container {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        z-index: 2;
+    }
+    .image-container {
+        height: 90vw;
+        width: 90vw;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .button-container {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        bottom: 10vh;
+
+        .square {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            width: 12vh;
+            height: 12vh;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .rectangular-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 4vw;
+            position: absolute;
+            bottom: 14vh;
+
+            .rectangular {
+                width: 40vh;
+                height: 25vh;
+                z-index: 4;
+
+                &#play {
+                    background: url("/static/eddig/assets/buttons/playbtn.png") no-repeat center center;
+                    background-size: contain;
+                    border: none;
+
+                    &:hover {
+                        width: 40vh;
+                        height: 25vh;
+                        background: url("/static/eddig/assets/buttons/playbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                        cursor: none;
+                    }
+                }
+
+                &#ranking {
+                    background: url("/static/eddig/assets/buttons/rankingbtn.png") no-repeat center center;
+                    background-size: contain;
+                    border: none;
+
+                    &:hover {
+                        width: 40vh;
+                        height: 25vh;
+                        background: url("/static/eddig/assets/buttons/rankingbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                        cursor: none;
+                    }
+                }
+
+                &#about {
+                    background: url("/static/eddig/assets/buttons/aboutbtn.png") no-repeat center center;
+                    background-size: contain;
+                    border: none;
+
+                    &:hover {
+                        width: 40vh;
+                        height: 25vh;
+                        background: url("/static/eddig/assets/buttons/aboutbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                        cursor: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 930px) {
+    .bode {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+
+        .container {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .image-container {
+            margin-top: 5vh;
+            max-height: 70vw;
+            height: 100%;
+            width: 85vw;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+
+            img {
+                height: 100%;
+                width: 100%;
+                content: url("/static/eddig/assets/EddigLogoMobile.png");
+            }
+        }
+
+        .button-container {
+            height: 100%;
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding-top: 18vh;
+
+            .square {
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                width: 12vh;
+                height: 12vh;
+                padding: 10px;
+                margin: 5px;
+            }
+
+            .rectangular-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3vh; /* Adjust the gap as needed */
+                position: relative;
+                margin: auto;
+
+                .rectangular {
+                    width: 70vw;
+                    height: 20vw;
+                    z-index: 4;
+
+                    &#play {
+                        background: url("/static/eddig/assets/buttons/playbtn.png") no-repeat center center;
+                        background-size: contain;
+                        border: none;
+
+                        &:hover {
+                            width: 40vh;
+                            height: 25vh;
+                            background: url("/static/eddig/assets/buttons/playbtnHover.png") no-repeat center center;
+                            background-size: contain;
+                            cursor: none;
+                        }
+                    }
+
+                    &#ranking {
+                        background: url("/static/eddig/assets/buttons/rankingbtn.png") no-repeat center center;
+                        background-size: contain;
+                        border: none;
+
+                        &:hover {
+                            width: 40vh;
+                            height: 25vh;
+                            background: url("/static/eddig/assets/buttons/rankingbtnHover.png") no-repeat center center;
+                            background-size: contain;
+                            cursor: none;
+                        }
+                    }
+
+                    &#about {
+                        background: url("/static/eddig/assets/buttons/aboutbtn.png") no-repeat center center;
+                        background-size: contain;
+                        border: none;
+
+                        &:hover {
+                            width: 40vh;
+                            height: 25vh;
+                            background: url("/static/eddig/assets/buttons/aboutbtnHover.png") no-repeat center center;
+                            background-size: contain;
+                            cursor: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
