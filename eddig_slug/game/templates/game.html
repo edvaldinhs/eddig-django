@@ -18,11 +18,14 @@
 <body>
   <div id="name-container">
     <div style="margin: 10px 60px -20px 60px; text-align: center;">
-      <p><b>--   Controles:   --</b></p>
-        <p>Movimento: <span><img style="height:100%; width:40px; margin-left: 5px" src="{% static 'eddig/assets/icons/akeys.png' %}" alt=""></span></p>
-        <p>Girar:    C</p>
-      </div>
-    <input type="text" id="user-name" placeholder="Insira seu nome" hidden/>
+      <p>Encontre os animais do mesmo tipo para vencer!</p>
+      <p><b>-- Controles: --</b></p>
+      <p>Movimento: <span><img style="height:100%; width:40px; margin-left: 5px"
+            src="{% static 'eddig/assets/icons/akeys.png' %}" alt=""></span></p>
+            <p>Girar: C</p>
+            <br>
+    </div>
+    <input type="text" id="user-name" placeholder="Insira seu nome" hidden />
     <button onclick="submitName()">Iniciar</button>
   </div>
 
@@ -37,7 +40,7 @@
     <p class="timer2"><span>00</span>s</p>
 
     <a href="/game/">
-    <button class="playAgain">Jogar Novamente</button>
+      <button class="playAgain">Jogar Novamente</button>
     </a>
     <a href="/">
       <button class="backToMenu">Voltar ao Menu</button>
