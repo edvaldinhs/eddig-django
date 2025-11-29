@@ -4,10 +4,22 @@
   box-sizing: border-box;
 }
 
+.aboutlogo {
+  margin: auto;
+  width: 34vw;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.aboutlogo img {
+  height: 100%;
+  width: 100%;
+}
+
 #loginForm {
   max-width: 400px;
-  margin: auto;
-  padding: 2rem;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1.5rem;
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -19,10 +31,11 @@
   margin-bottom: 0.5rem;
   font-weight: bold;
   color: #333;
+  font-size: 0.95rem;
 }
 #loginForm input {
-  width: calc(100% - 2rem);
-  padding: 0.5rem 1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -56,4 +69,100 @@
 #loginForm button:active {
   background-color: #FF7ACB;
   transform: rotate(-1deg);
+}
+
+@media (max-width: 600px) {
+  .controllers .wrapper button {
+    height: 45% !important;
+    width: 45% !important;
+  }
+  .controllers .wrapper button:hover {
+    height: 60% !important;
+    width: 60% !important;
+    cursor: none;
+  }
+  .controllers .wrapper #home img {
+    height: 100%;
+    width: 100%;
+  }
+  .aboutlogo {
+    margin-top: 5rem;
+    width: 80vw;
+  }
+  #loginForm {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  #loginForm label {
+    font-size: 0.9rem;
+  }
+  #loginForm input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+  #loginForm button {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  #loginForm {
+    max-width: 350px;
+  }
+}
+@media only screen and (max-width: 930px) and (orientation: landscape) {
+  .about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50vw;
+    padding: 1rem 5vw;
+  }
+  .about .wrapper:first-child,
+  .about .box {
+    flex: 0 0 45%;
+    width: 80%;
+    margin: 0;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .aboutlogo {
+    width: 40vw;
+    margin: 0;
+  }
+  .aboutlogo img {
+    max-width: 100%;
+    height: auto;
+  }
+  .about .wrappper {
+    flex: 0 0 45%;
+    width: 45%;
+    margin: 0;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+  #loginForm {
+    max-width: 400px;
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  #loginForm label,
+  #loginForm input,
+  #loginForm button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
 }/*# sourceMappingURL=login.css.map */

@@ -118,18 +118,18 @@ tr {
 .cell-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 350px;
     height: 55px;
     background-color: #ffa8dc;
     border-radius: 20px;
-    padding: 15px 0 15px 60px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
-
 .name {
     font-size: 18px;
     color: black;
-    margin-right: 100px;
+    margin-right: 75px;
     text-align: center;
     flex: 1;
 }
@@ -141,12 +141,96 @@ tr {
 .circle {
     width: 50px;
     height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
     background-color: #ff7ccb;
-    border-radius: 25px;
+    margin-left: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    margin: 0 10px;
     color: white;
+}
+
+@media (max-width: 768px) {
+    .rank {
+        margin-top: 20px;
+    }
+
+    .controllers .wrapper {
+    button{
+        height: 45% !important;
+        width: 45% !important;
+    }
+    button:hover {
+        height: 60% !important;
+        width: 60% !important;
+        cursor: none;
+    }
+    #home {
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    z-index: 8;
+}
+    .rankinglogo {
+        width: 60vw;
+    }
+
+    table {
+        width: 95%; 
+        margin: 15px auto;
+    }
+    .nameth {
+        padding: 8px auto 8px auto;
+    }
+
+    .timeth {
+        padding-right: auto;
+    }
+
+    th p {
+        width: auto;
+        min-width: 50px;
+    }
+    
+    tr {
+        margin: 8px 0;
+    }
+
+    .cell-content {
+        width: 90%;
+        height: 45px;
+        padding: 0 8px;
+    }
+    
+    .name {
+        font-size: 16px;
+        margin-right: 20px;
+        text-align: left;
+        padding-left: 5px;
+    }
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+
+    .controllers .wrapper {
+        button {
+            margin: 10px 0 0 10px;
+            height: 70%;
+            width: 70%;
+        }
+        button:hover {
+            height: 90%;
+            width: 90%;
+        }
+    }
 }

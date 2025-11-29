@@ -419,7 +419,7 @@ input::placeholder {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 3vh; /* Adjust the gap as needed */
+                gap: 3vh;
                 position: relative;
                 margin: auto;
 
@@ -475,4 +475,192 @@ input::placeholder {
     }
 }
 
+@media only screen and (max-width: 930px) {
+    .bode {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
 
+        #logoutButton {
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100vh;
+            width: 100vw;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .image-container {
+            margin-top: 5vh;
+            max-height: 40vh;
+            height: auto;
+            width: 85vw;
+            flex-grow: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+
+            img {
+                height: 100%;
+                width: 100%;
+                content: url("/static/eddig/assets/EddigLogoMobile.png");
+            }
+        }
+
+        .button-container {
+            height: auto;
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding-top: 5vh;
+            
+            bottom: auto;
+
+            .square {
+                width: 10vw;
+                height: 10vw;
+                left: 2vw;
+                bottom: 2vh;
+                padding: 5px;
+            }
+
+            .rectangular-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3vh;
+                position: relative;
+                bottom: auto;
+                margin: auto;
+                width: 100%;
+
+                .rectangular {
+                    width: 70vw;
+                    height: calc(70vw / 3);
+                    min-height: 15vh;
+                    z-index: 4;
+
+                    &:hover {
+                        width: 70vw; 
+                        height: calc(70vw / 3);
+                        cursor: none;
+                    }
+
+                    &#play, &#ranking, &#about {
+                        background-size: contain;
+                        transition: all 0.2s ease-in-out;
+                    }
+                    &#play:hover {
+                        background: url("/static/eddig/assets/buttons/playbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                    }
+
+                    &#ranking:hover {
+                        background: url("/static/eddig/assets/buttons/rankingbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                    }
+
+                    &#about:hover {
+                        background: url("/static/eddig/assets/buttons/aboutbtnHover.png") no-repeat center center;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .bode {
+        .container {
+            justify-content: space-around; 
+        }
+        
+        .image-container {
+            max-height: 35vh;
+            width: 90vw;
+            margin-top: 3vh;
+        }
+
+        .button-container {
+            padding-top: 2vh; 
+            
+            .rectangular-buttons {
+                gap: 2vh;
+
+                .rectangular {
+                    width: 85vw;
+                    height: calc(85vw / 4);
+                    min-height: 12vh;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 930px) and (orientation: landscape) {
+    .bode {
+        .container {
+            flex-direction: row; 
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .image-container {
+            max-height: 80vh;
+            max-width: 40vw;
+            width: auto;
+            height: auto;
+            margin: 0;
+            flex-grow: 0;
+        }
+
+        .button-container {
+            height: 80vh;
+            width: 50vw;
+            padding-top: 0;
+            
+            .rectangular-buttons {
+                gap: 1.5vh;
+                
+                .rectangular {
+                    width: 40vw;
+                    height: 10vh;
+                    min-height: 60px;
+                    
+                    &:hover {
+                        width: 40vw;
+                        height: 10vh;
+                    }
+                }
+            }
+        }
+        
+        #logoutButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+}
